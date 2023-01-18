@@ -34,7 +34,7 @@ While the typical 'hello world' program in wat uses an array in memory, this `$p
     )
 
 
-Once I figure out how to do loops, that's sure to prove useful, I think.
+Once I figure out how to do loops, that ought to prove useful.
 
 Because I compiled my textgraphics program ffl0 to wasm and got great results, I knew there was a way to print unicode blocks (what I use for pixels when I don't have actual graphics.) This is where UTF-8 comes in, which is a variable length coding scheme. Turns out I need 3 bytes to get my block printed, and there's a little bit of math involved getting from the 32-bit unicode scalar to the correct (in this case) 3 byte encoding. The scheme is pretty simple, but I just used an online resource. https://www.utf8-chartable.de/
 
