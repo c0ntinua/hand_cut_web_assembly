@@ -2,6 +2,11 @@ It's a slow climb, but I've learned a few more tricks. I'll share a few thoughts
 
 `(import "wasi_unstable" "random_get" (func $random_get (param i32 i32) (result i32) ))`
 
+I was able to manage this output:
+
+![Screenshot 2023-01-18 at 6 19 40 AM](https://user-images.githubusercontent.com/90075803/213168436-b89a3e6b-b34a-46d6-8a0a-8536f498be6a.png)
+
+
 This is another use of the iovec struct (input-output vector), which is an address to begin writing at and then a number of bytes to write. I wanted random i32 values, so I asked for 4 bytes.
 
 `(call $random_get (get_global $iovecp) (i32.const 4) )`
