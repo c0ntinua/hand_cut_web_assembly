@@ -111,7 +111,7 @@ Once I looked at a few random numbers (and figured out that I needed to ask for 
 
 
 
-I'll just end here by saying it's been fun to work at such a low level. Printing out a number takes a little research and work! That's largely because the resources aren't plentiful. I can imagine someone even writing an introduction to programming using WA. It's be like C in that you'd deal with pointers, but maybe dealing with a virtual machine is also loving in a more rational universe, a nice place to start. I think WA is better than the GWBASIC I started with.
+I'll just end here by saying it's been fun to work at such a low level. Printing out a number takes a little research and work! That's largely because the resources aren't plentiful. I can imagine someone even writing an introduction to programming using WA. It's be like C in that you'd deal with pointers, but maybe dealing with a virtual machine is to live in a more rational universe, a nice place to start. I think WA is better than the GWBASIC I started with.
 
 
 
