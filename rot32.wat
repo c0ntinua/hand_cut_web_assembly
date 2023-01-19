@@ -45,7 +45,8 @@
         (local $i i32 ) 
         (local.set $i (i32.const 31))
         (loop $loop
-            (call $print_bit_as_block ( call $ith_bit (local.get $x) (local.get $i) )) 
+            (call $print_bit_as_block ( call $ith_bit (local.get $x) (local.get $i) ))
+            (call $print_bit_as_block ( call $ith_bit (local.get $x) (local.get $i) ))  
             (local.set $i (i32.sub (local.get $i) (i32.const 1))) 
             (br_if $loop (i32.le_s (i32.const 0) (local.get $i) ))
         )
@@ -61,12 +62,10 @@
     (func $eval (param $f i32) (param $i i32) (result i32)
         (i32.rotr (i32.and ( i32.rotl (i32.const 1) (local.get $i) ) (  local.get $f )) (local.get $i))
     )
-    ;;pub fn next_32(s : u32, f : u32, i : u32) -> u32 { eval_32(f,sticks(s,i) as u32).rotate_left(i+3)}
     (func $next (param $s i32) (param $f i32) (param $i i32) (result i32)
         (i32.rotl (call $eval (local.get $f) (call $neighbor_code (local.get $s) (local.get $i))) (i32.add (local.get $i) (i32.const 3)))
     
     )
-    ;;pub fn turn_32(s : u32, f : u32)-> u32 { let mut r = 0u32; for i in 0..64 { r |= next_32(s,f,i);} r}
     (func $turn (param $s i32) (param $f i32) (result i32)
         (local $i i32)
         (local $r i32)
@@ -75,24 +74,24 @@
         (loop $loop 
             (local.set $r (i32.or (local.get $r) (call $next (local.get $s) (local.get $f)(local.get $i))))
             (local.set $i (i32.add (local.get $i) (i32.const 1)))
-            (br_if $loop (i32.ge_s (i32.const 32) (local.get $i) ))
+            (br_if $loop (i32.ge_s (i32.const 32) (local.get $i)))
             
         )
         (local.get $r)
     )
-
     (func $main (export "_start")
         (local $f i32)
+        (local $s i32)
         (local $i i32)
         (local.set $f (call $rand_32))
-        
+        (local.set $s (local.get $f))    
         (local.set $i (i32.const 0)) 
         (loop $loop 
-            (local.set $f (call $turn (local.get $f) (local.get $f)))
-            (call $print_i32_as_blocks (local.get $f) )
+            (local.set $s (call $turn (local.get $s) (local.get $f)))
+            (call $print_i32_as_blocks (local.get $s))
             (call $print (i32.const 0x0A))
             (local.set $i (i32.add (local.get $i) (i32.const 1)))
-            (br_if $loop (i32.ge_s (i32.const 32) (local.get $i) ))
+            (br_if $loop (i32.ge_s (i32.const 32) (local.get $i)))
         )
         (call $print (i32.const 0x0A))
     )
