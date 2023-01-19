@@ -46,7 +46,7 @@ I'm starting to get the hand of fd_read and fd_write which are crucial for rolli
     
 An iovec (input output vector) is just a pair of i32 values side by side in (global) memory.  The one on the left (in the numerically lower memory position) is a pointer to some other spot in memory (where the data to be written can be found or the data to be read can be stored.) The one on the right, the very next i32, represents the number of bytes of that storage.   So (30, 5) says that the storage is located at address 30 and is 5 bytes long. This is logical enough. What's tricky is that there's a length parameter in fd_read and fd_write that does not refer to the length of the store but rather to the number of iovecs being pointed at. In fact it's an *array* of iovecs being pointed at. 
 
-Basically I'm using ( fd_read (stdin) (address of iovec array) (len of iovec array) (place to store num bytes written).  So I put 2 iovecs in memory and stash my params accordingly. 
+Basically I'm using ( fd_read (stdin) (address of iovec array) (len of iovec array) (place to store num bytes written).  So I put 2 iovecs in memory and stash my params accordingly. Note that I give each i32 the 4 bytes it needs to breath.
 
 
         (func $write_i32_i32 (param $byte1 i32) (param $byte2 i32)
