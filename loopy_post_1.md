@@ -1,4 +1,12 @@
-It's a slow climb, but I've learned a few more tricks. I'll share a few thoughts on my `blocks.wat` file. I got random numbers going, using 
+It's a slow climb, but I've learned a few more tricks. 
+
+
+
+I was able to manage this output:
+
+![Screenshot 2023-01-18 at 6 19 40 AM](https://user-images.githubusercontent.com/90075803/213168436-b89a3e6b-b34a-46d6-8a0a-8536f498be6a.png)
+
+I'll share a few thoughts on my `blocks.wat` file. I got random numbers going, using 
 
 `(import "wasi_unstable" "random_get" (func $random_get (param i32 i32) (result i32) ))`
 
@@ -103,7 +111,7 @@ Once I looked at a few random numbers (and figured out that I needed to ask for 
 
 
 
-I'll just end here by saying it's been fun to work at such a low level. Printing out a number takes a little research and work! That's largely because the resources aren't plentiful. I can imagine someone even writing an introduction to programming using WA. It's be like C in that you'd deal with pointers, but maybe dealing with a virtual machine is also loving in a more rational universe, a nice place to start. I think WA is better than the GWBASIC I started with.
+I'll just end here by saying it's been fun to work at such a low level. Printing out a number takes a little research and work! That's largely because the resources aren't plentiful. I can imagine someone even writing an introduction to programming using WA. It's be like C in that you'd deal with pointers, but maybe dealing with a virtual machine is to live in a more rational universe, a nice place to start. I think WA is better than the GWBASIC I started with.
 
 
 
