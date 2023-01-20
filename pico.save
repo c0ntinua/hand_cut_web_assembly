@@ -60,6 +60,32 @@
         call $as_digit
         call $write
     )
+    (func $pow_10 (param $p i32) (result i32)
+        (local $r i32)
+        i32.const 1
+        local.set $r
+        loop $loop
+            local.get $p
+            call $write_digit
+            call $linefeed
+
+            local.get $p
+            i32.const 1
+            i32.sub
+            local.set $p
+
+            local.get $r
+            i32.const 10
+            i32.mul
+            local.set $r
+
+            local.get $p
+            i32.const 0
+            i32.gt_s
+            br_if $loop
+        end
+        local.get $r
+    )
     (func $write_binary (param $x i32)
         (local $i i32)
         i32.const 31
@@ -87,9 +113,45 @@
         i32.const 0
         i32.load
     )
-    (func $main (export "_start")    
-        call $rand_i32
+    (func %write_dec (param $x)
+        (local $p i32)
+        (local $q i32)
+        i32.const 9
+        local.set $p
+        loop $loop
+            local.get $p
+            call $pow_10
+            local.get $x
+            i32.le_u
+            if
+                local.get $x
+                local.get $p
+                call $pow_10
+                i32.div_u
+                local.set $q
+                local.get $q
+                call $write_digit
+                local.get $x
+                local.get $q
+                local.get $p
+                call $pow_10
+                i32.mul
+                i32.sub
+                local.set $x
+            end
+            local.get $f32.push
+
+                
+
+
+    
+    
+    )
+    (func $main (export "_start")
+        i32.const 9
+        call $pow_10
         call $write_binary
     )
     
 )
+
