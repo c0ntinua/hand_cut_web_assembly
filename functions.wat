@@ -60,7 +60,7 @@
         call $as_digit
         call $write
     )
-    (func $pow_10 (param $p i32) (result i32)
+    (func $10^ (param $p i32) (result i32)
         (local $r i32)
         i32.const 1
         local.set $r
@@ -82,7 +82,7 @@
         end
         local.get $r
     )
-    (func $write_binary (param $x i32)
+    (func $write_bin (param $x i32)
         (local $i i32)
         i32.const 31
         local.set $i 
@@ -113,25 +113,40 @@
     (func $write_dec (param $x i32)
         (local $p i32)
         (local $q i32)
+        (local $w i32)
+        i32.const 0
+        local.set $w
         i32.const 9
         local.set $p
         loop $loop
             local.get $x
             local.get $p
-            call $pow_10
+            call $10^
             i32.div_u
             local.tee $q
-            local.get $x
+            call $>0
             local.get $p
-            select
-            call $write_digit
+            call $==0
+            i32.or
+            if
+                i32.const 1
+                local.set $w
+            end
+            local.get $w
+            if
+                local.get $q
+                local.get $x
+                local.get $p
+                select
+                call $write_digit
+            end
             local.get $q
             call $>=0
             if
                 local.get $x
                 local.get $q
                 local.get $p
-                call $pow_10
+                call $10^
                 i32.mul
                 i32.sub
                 local.set $x
@@ -153,9 +168,20 @@
         i32.const 0
         i32.ge_s
     )
+    (func $==0 (param $x i32) (result i32)
+        local.get $x
+        i32.const 0
+        i32.eq
+    )
+    (func $>0 (param $x i32) (result i32)
+        local.get $x
+        i32.const 0
+        i32.gt_u
+    )
+
     (func $main (export "_start")
-        i32.const 100
-        call $write_dec
+        call $read
+        call $write
         ;;call $write_digit
     )
     
